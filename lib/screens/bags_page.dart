@@ -45,7 +45,7 @@ class BagsPage extends StatelessWidget {
                   child: ListTile(
                     leading: Image.network(cartItems[index].imageUrl),
                     title: Text(cartItems[index].name),
-                    subtitle: Text('Quantity: 1'),
+                    subtitle: Text('Тоо ширхэг: 1'),
                   ),
                 );
               },
@@ -59,7 +59,7 @@ class BagsPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Нийт: \₮50.00', // Set a static total amount
+              'Нийт: \₮50.00',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -67,13 +67,13 @@ class BagsPage extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                // Add your logic here
+                // logic nem 
               },
               style: ButtonStyle(
                 backgroundColor:
                     MaterialStateProperty.all<Color>(Color.fromARGB(255, 117, 13, 165)),
               ),
-              child: Text('Худалдаж авах'),
+              child: Text('Худалдаж авах  '),
             ),
           ],
         ),

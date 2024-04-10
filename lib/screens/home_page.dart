@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/screens/categories.dart';
 import 'bags_page.dart';
 import 'shop_page.dart';
-import 'favorite_page.dart';
+import 'categories.dart';
 import 'profile_page.dart';
 import 'hi1.dart';
+
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -18,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   List<Widget> pages = [
     const ShopPage(),
     BagsPage(),
-    const FavoritePage(),
+    const CategoriesPage(),
     const ProfilePage()
   ];
 
