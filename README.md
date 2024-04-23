@@ -15,10 +15,10 @@ SneakerShop бол Flutter ашиглан хөгжүүлсэн онлайн дэ
 ## Суулгах заавар
 
 1. Repository-г клон хийх:
-  'git clone https://github.com/Sumiyall/SneakerShop.git'
-2. Төслийн хавтас руу орох: 'cd SneakerShop'
-3. Dependencies суулгах: 'flutter pub get'
-4. Аппликейшнийг эхлүүлэх: 'flutter run'
+`git clone https://github.com/Sumiyall/SneakerShop.git`
+2. Төслийн хавтас руу орох: `cd SneakerShop`
+3. Dependencies суулгах: `flutter pub get`
+4. Аппликейшнийг эхлүүлэх: `flutter run`
 
 ## Ашигласан технологиуд
 - Flutter
@@ -29,9 +29,9 @@ SneakerShop бол Flutter ашиглан хөгжүүлсэн онлайн дэ
 ## Хувь нэмэр оруулах
 Хувь нэмэр оруулахыг урьж байна! Хэрэв та SneakerShop-д хувь нэмрээ оруулахыг хүсвэл дараах алхмуудыг дагана уу:
 1. Repository-г форк хийх.
-2. Шинэ branch үүсгэх: 'git checkout -b my-new-feature'
-3. Өөрчлөлтүүдээ хийж коммит хийх: 'git commit -m 'Add some feature'
-4. Branch-даа форк хийсэн repository руу push хийх: 'git push origin my-new-feature'
+2. Шинэ branch үүсгэх: `git checkout -b my-new-feature`
+3. Өөрчлөлтүүдээ хийж коммит хийх: `git commit -m 'Add some feature`
+4. Branch-даа форк хийсэн repository руу push хийх: `git push origin my-new-feature`
 
 ## Лиценз
 Энэ төсөл нь [MIT License](LICENSE) дор хамрагдана.
