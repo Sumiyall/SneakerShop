@@ -2,8 +2,21 @@ import 'package:flutter/material.dart';
 import 'hi1.dart';
 import 'proddetail.dart';
 
-class ShopPage extends StatelessWidget {
+class ShopPage extends StatefulWidget {
   const ShopPage({Key? key});
+
+  @override
+  _ShopPageState createState() => _ShopPageState();
+}
+
+class _ShopPageState extends State<ShopPage> {
+  String selectedChoice = "Men's";
+
+  void onChoiceSelected(String choice) {
+    setState(() {
+      selectedChoice = choice;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -11,16 +24,6 @@ class ShopPage extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Login1()),
-                );
-              },
-              color: const Color.fromARGB(255, 255, 255, 255),
-            ),
             backgroundColor: Color.fromARGB(255, 128, 21, 138),
             title: Text(
               "Гутлын дэлгүүр",
@@ -28,6 +31,29 @@ class ShopPage extends StatelessWidget {
             ),
             floating: true,
             pinned: true,
+            bottom: PreferredSize(
+              preferredSize: Size.fromHeight(40),
+              child: Container(
+                color: Color.fromARGB(255, 128, 21, 138),
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Search',
+                    hintStyle: TextStyle(color: Colors.white),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide.none,
+                    ),
+                    filled: true,
+                    fillColor: Colors.white24,
+                    prefixIcon:
+                        Icon(Icons.search, color: Colors.white, size: 20),
+                    contentPadding: EdgeInsets.symmetric(vertical: 8),
+                  ),
+                  style: TextStyle(color: Colors.white, fontSize: 14),
+                ),
+              ),
+            ),
           ),
           SliverFillRemaining(
             child: SingleChildScrollView(
@@ -35,15 +61,79 @@ class ShopPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   SizedBox(height: 16),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Text(
-                      'Sneakers',
-                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        SizedBox(width: 16),
+                        ChoiceChip(
+                          label: Text(
+                            "Men's",
+                            style: TextStyle(
+                              color: selectedChoice == "Men's"
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                          ),
+                          selected: selectedChoice == "Men's",
+                          onSelected: (selected) => onChoiceSelected("Men's"),
+                          backgroundColor: Colors.grey[300],
+                          selectedColor: Colors.purple,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          elevation: 2,
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        ),
+                        SizedBox(width: 8),
+                        ChoiceChip(
+                          label: Text(
+                            "Women's",
+                            style: TextStyle(
+                              color: selectedChoice == "Women's"
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                          ),
+                          selected: selectedChoice == "Women's",
+                          onSelected: (selected) => onChoiceSelected("Women's"),
+                          backgroundColor: Colors.grey[300],
+                          selectedColor: Colors.purple,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          elevation: 2,
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        ),
+                        SizedBox(width: 8),
+                        ChoiceChip(
+                          label: Text(
+                            "Kid's",
+                            style: TextStyle(
+                              color: selectedChoice == "Kid's"
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                          ),
+                          selected: selectedChoice == "Kid's",
+                          onSelected: (selected) => onChoiceSelected("Kid's"),
+                          backgroundColor: Colors.grey[300],
+                          selectedColor: Colors.purple,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          elevation: 2,
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        ),
+                        SizedBox(width: 16),
+                      ],
                     ),
                   ),
                   SizedBox(height: 16),
-                  SneakerCart(),
+                  SneakerCart(selectedChoice: selectedChoice),
                 ],
               ),
             ),
@@ -55,58 +145,76 @@ class ShopPage extends StatelessWidget {
 }
 
 class SneakerCart extends StatelessWidget {
+  final String selectedChoice;
+
+  SneakerCart({required this.selectedChoice});
+
   final List<Map<String, dynamic>> sneakers = [
     {
       'name': 'Nike AirForce 1',
       'type': 'Эрэгтэй',
       'price': 250000,
-      'imageUrl': 'https://media.gq.com/photos/5e4c2c5440e46c00081a1de5/16:9/w_1280,c_limit/3x2.jpg',
+      'imageUrl':
+          'https://media.gq.com/photos/5e4c2c5440e46c00081a1de5/16:9/w_1280,c_limit/3x2.jpg',
     },
     {
       'name': 'Nike AirForce 1',
       'type': 'Эрэгтэй',
       'price': 250000,
-      'imageUrl': 'https://media.gq.com/photos/5e4c2c5440e46c00081a1de5/16:9/w_1280,c_limit/3x2.jpg',
+      'imageUrl':
+          'https://media.gq.com/photos/5e4c2c5440e46c00081a1de5/16:9/w_1280,c_limit/3x2.jpg',
     },
     {
       'name': 'Nike AirForce 1',
       'type': 'Эрэгтэй',
       'price': 250000,
-      'imageUrl': 'https://media.gq.com/photos/5e4c2c5440e46c00081a1de5/16:9/w_1280,c_limit/3x2.jpg',
+      'imageUrl':
+          'https://media.gq.com/photos/5e4c2c5440e46c00081a1de5/16:9/w_1280,c_limit/3x2.jpg',
     },
     {
       'name': 'Nike AirForce 1',
       'type': 'Эрэгтэй',
       'price': 250000,
-      'imageUrl': 'https://media.gq.com/photos/5e4c2c5440e46c00081a1de5/16:9/w_1280,c_limit/3x2.jpg',
+      'imageUrl':
+          'https://media.gq.com/photos/5e4c2c5440e46c00081a1de5/16:9/w_1280,c_limit/3x2.jpg',
     },
     {
       'name': 'Nike AirForce 1',
       'type': 'Эрэгтэй',
       'price': 250000,
-      'imageUrl': 'https://media.gq.com/photos/5e4c2c5440e46c00081a1de5/16:9/w_1280,c_limit/3x2.jpg',
+      'imageUrl':
+          'https://media.gq.com/photos/5e4c2c5440e46c00081a1de5/16:9/w_1280,c_limit/3x2.jpg',
     },
     {
       'name': 'Nike AirForce 1',
       'type': 'Эрэгтэй',
       'price': 250000,
-      'imageUrl': 'https://media.gq.com/photos/5e4c2c5440e46c00081a1de5/16:9/w_1280,c_limit/3x2.jpg',
+      'imageUrl':
+          'https://media.gq.com/photos/5e4c2c5440e46c00081a1de5/16:9/w_1280,c_limit/3x2.jpg',
     },
     {
       'name': 'Nike AirForce 1',
       'type': 'Эрэгтэй',
       'price': 250000,
-      'imageUrl': 'https://media.gq.com/photos/5e4c2c5440e46c00081a1de5/16:9/w_1280,c_limit/3x2.jpg',
+      'imageUrl':
+          'https://media.gq.com/photos/5e4c2c5440e46c00081a1de5/16:9/w_1280,c_limit/3x2.jpg',
     },
   ];
 
- @override
+  @override
   Widget build(BuildContext context) {
+    List<Map<String, dynamic>> filteredSneakers = sneakers
+        .where((sneaker) =>
+            selectedChoice == "Men's" && sneaker['type'] == 'Эрэгтэй' ||
+            selectedChoice == "Women's" && sneaker['type'] == 'Эмэгтэй' ||
+            selectedChoice == "Kid's" && sneaker['type'] == 'Хүүхэд')
+        .toList();
+
     return GridView.count(
       crossAxisCount: 2,
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
-      children: sneakers.map((sneaker) {
+      children: filteredSneakers.map((sneaker) {
         return Container(
           height: 300,
           child: Card(
@@ -133,12 +241,13 @@ class SneakerCart extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ProductDetailsPage(product: sneaker),
+                              builder: (context) =>
+                                  ProductDetailsPage(product: sneaker),
                             ),
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.purple,
+                          backgroundColor: Colors.purple,
                         ),
                         child: sneaker['price'] != null
                             ? Text('Дэлгэрэнгүй')

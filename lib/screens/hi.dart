@@ -37,7 +37,6 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Login Page'),
-        
       ),
       body: Padding(
         padding: EdgeInsets.all(20.0),
@@ -80,7 +79,7 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 20),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  primary: Colors.blue,
+                  backgroundColor: Colors.blue,
                   padding: EdgeInsets.symmetric(horizontal: 128, vertical: 10),
                   textStyle:
                       TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),

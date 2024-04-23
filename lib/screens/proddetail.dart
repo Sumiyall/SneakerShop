@@ -66,12 +66,12 @@ class ProductDetailsPage extends StatelessWidget {
                           imageUrl: product['imageUrl'],
                           type: product['type'],
                           price: product['price'],
-                  ),
-                );
-                Navigator.pop(context);
-              },
+                        ),
+                      );
+                      Navigator.pop(context);
+                    },
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.purple,
+                      backgroundColor: Colors.purple,
                     ),
                     child: Text('Сагсанд нэмэх'),
                   ),
