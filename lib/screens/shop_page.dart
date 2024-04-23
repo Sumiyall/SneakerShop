@@ -128,6 +128,27 @@ class _ShopPageState extends State<ShopPage> {
                           padding:
                               EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                         ),
+                        SizedBox(width: 8),
+                        ChoiceChip(
+                          label: Text(
+                            "Brands",
+                            style: TextStyle(
+                              color: selectedChoice == "Brands"
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                          ),
+                          selected: selectedChoice == "Brands",
+                          onSelected: (selected) => onChoiceSelected("Brands"),
+                          backgroundColor: Colors.grey[300],
+                          selectedColor: Colors.purple,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          elevation: 2,
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        ),
                         SizedBox(width: 16),
                       ],
                     ),
@@ -203,64 +224,127 @@ class SneakerCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Map<String, dynamic>> filteredSneakers = sneakers
-        .where((sneaker) =>
-            selectedChoice == "Men's" && sneaker['type'] == 'Эрэгтэй' ||
-            selectedChoice == "Women's" && sneaker['type'] == 'Эмэгтэй' ||
-            selectedChoice == "Kid's" && sneaker['type'] == 'Хүүхэд')
-        .toList();
-
-    return GridView.count(
-      crossAxisCount: 2,
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      children: filteredSneakers.map((sneaker) {
-        return Container(
-          height: 300,
-          child: Card(
-            child: Column(
-              children: [
-                Expanded(
-                  child: Image.network(
-                    sneaker['imageUrl']!,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(sneaker['name']!),
-                      Text(sneaker['type']!),
-                      sneaker['price'] != null
-                          ? Text('${sneaker['price']}₮')
-                          : Text('Price on request'),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  ProductDetailsPage(product: sneaker),
-                            ),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.purple,
-                        ),
-                        child: sneaker['price'] != null
-                            ? Text('Дэлгэрэнгүй')
-                            : Text('Дэлгэрэнгүй'),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+    if (selectedChoice == "Brands") {
+      // Display brand logos or cards
+      return ListView(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        children: [
+          BrandCard(
+            brandName: "Nike",
+            logoUrl:
+                "https://purepng.com/public/uploads/large/purepng.com-nike-logologobrand-logoiconslogos-251519940082eoxxs.png",
           ),
-        );
-      }).toList(),
+          BrandCard(
+            brandName: "Adidas",
+            logoUrl:
+                "https://purepng.com/public/uploads/large/21502362475r8bjrgyzs78go6s1hjhf8hfz22xjolzbtlkj7loqtg18wsxpb6l72dmqxhn1regqpjjscyuppavtcnacyuummijt8cmz7wj1ehjx.png",
+          ),
+          BrandCard(
+            brandName: "Parker",
+            logoUrl:
+                "https://purepng.com/public/uploads/large/purepng.com-parker-hannifin-logologobrand-logoiconslogos-2515199387710dv6x.png",
+          ),
+        ],
+      );
+    } else {
+      // Filter sneakers based on the selected choice
+      List<Map<String, dynamic>> filteredSneakers = sneakers
+          .where((sneaker) =>
+              selectedChoice == "Men's" && sneaker['type'] == 'Эрэгтэй' ||
+              selectedChoice == "Women's" && sneaker['type'] == 'Эмэгтэй' ||
+              selectedChoice == "Kid's" && sneaker['type'] == 'Хүүхэд')
+          .toList();
+
+      return GridView.count(
+        crossAxisCount: 2,
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        children: filteredSneakers.map((sneaker) {
+          return Container(
+            height: 300,
+            child: Card(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Image.network(
+                      sneaker['imageUrl']!,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(sneaker['name']!),
+                        Text(sneaker['type']!),
+                        sneaker['price'] != null
+                            ? Text('${sneaker['price']}₮')
+                            : Text('Price on request'),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    ProductDetailsPage(product: sneaker),
+                              ),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.purple,
+                          ),
+                          child: sneaker['price'] != null
+                              ? Text('Дэлгэрэнгүй')
+                              : Text('Дэлгэрэнгүй'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }).toList(),
+      );
+    }
+  }
+}
+
+class BrandCard extends StatelessWidget {
+  final String brandName;
+  final String logoUrl;
+
+  const BrandCard({required this.brandName, required this.logoUrl});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          children: [
+            Image.network(
+              logoUrl,
+              height: 80,
+              width: 80,
+            ),
+            SizedBox(width: 16),
+            Text(
+              brandName,
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
