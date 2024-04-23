@@ -1,16 +1,40 @@
-# shop_app
+# SneakerShop
 
-A new Flutter project.
+SneakerShop бол Flutter ашиглан хөгжүүлсэн онлайн дэлгүүрийн мобайл аппликейшн бөгөөд хэрэглэгчдэд пүүз хайх, үзэх, худалдан авах боломжийг олгодог.
 
-## Getting Started
+## Онцлог шинж чанарууд
 
-This project is a starting point for a Flutter application.
+- Хэрэглэгчийн бүртгэл болон нэвтрэлт
+- Брэнд, загвар, хэмжээ, үнээр пүүз хайх боломжтой
+- Бүтээгдэхүүний дэлгэрэнгүй хуудас дээр зураг, тайлбар, хэрэглэгчдийн сэтгэгдэл байдаг
+- Сагс ашиглах боломжтой
+- Stripe-ээр аюулгүй төлбөр төлөх
+- Захиалгын явцыг хянах болон түүхийг хадгалах
+- Бүтээгдэхүүн, захиалга, хэрэглэгчдийг удирдах админ хэсэг
 
-A few resources to get you started if this is your first Flutter project:
+## Суулгах заавар
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Repository-г клон хийх:
+  'git clone https://github.com/Sumiyall/SneakerShop.git'
+2. Төслийн хавтас руу орох: 'cd SneakerShop'
+3. Dependencies суулгах: 'flutter pub get'
+4. Аппликейшнийг эхлүүлэх: 'flutter run'
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Ашигласан технологиуд
+- Flutter
+- Dart
+- Firebase
+- Provider (State Management)
+
+## Хувь нэмэр оруулах
+Хувь нэмэр оруулахыг урьж байна! Хэрэв та SneakerShop-д хувь нэмрээ оруулахыг хүсвэл дараах алхмуудыг дагана уу:
+1. Repository-г форк хийх.
+2. Шинэ branch үүсгэх: 'git checkout -b my-new-feature'
+3. Өөрчлөлтүүдээ хийж коммит хийх: 'git commit -m 'Add some feature'
+4. Branch-даа форк хийсэн repository руу push хийх: 'git push origin my-new-feature'
+
+## Лиценз
+Энэ төсөл нь [MIT License](LICENSE) дор хамрагдана.
+
+## Холбоо барих
+- Имэйл: sumyab0701@gmail.com
