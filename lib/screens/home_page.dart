@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
       decoration: BoxDecoration(
         color: _currentIndex == index ? Colors.white : Colors.transparent,
         shape: BoxShape.rectangle,
-        borderRadius: BorderRadius.circular(16), // Add border radius here
+        borderRadius: BorderRadius.circular(16),
       ),
       padding: EdgeInsets.all(12),
       child: Icon(

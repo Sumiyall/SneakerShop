@@ -16,8 +16,8 @@ class _BillingPageState extends State<BillingPage> {
     final cartItems = cartProvider.cartItems;
 
     double subtotal = cartItems.fold(0, (sum, item) => sum + (item.price ?? 0));
-    double shippingCost = 10.0; // Example shipping cost
-    double tax = subtotal * 0.1; // Example tax calculation (10% of subtotal)
+    double shippingCost = 10.0; 
+    double tax = subtotal * 0.1; 
     double estimatedTotal = subtotal + shippingCost + tax;
 
     return Scaffold(
@@ -89,7 +89,6 @@ class _BillingPageState extends State<BillingPage> {
                   ElevatedButton(
                     onPressed: selectedPayment != null
                         ? () {
-                            // Handle payment selection
                             print('Selected Payment: $selectedPayment');
                           }
                         : null,

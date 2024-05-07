@@ -52,11 +52,11 @@ class CategoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200, // Set a fixed height to prevent overflow
+      height: 200,
       child: Card(
-        elevation: 4, // Add elevation for a shadow effect
+        elevation: 4, 
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10), // Add rounded corners
+          borderRadius: BorderRadius.circular(10), 
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
@@ -64,11 +64,11 @@ class CategoryItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               AspectRatio(
-                aspectRatio: 1, // Maintain aspect ratio for images
+                aspectRatio: 1, 
                 child: imageUrl != null
                     ? Image.network(
                         imageUrl!,
-                        fit: BoxFit.cover, // Ensure the image covers the space
+                        fit: BoxFit.cover, 
                       )
                     : const SizedBox.shrink(),
               ),

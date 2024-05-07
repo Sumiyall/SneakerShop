@@ -40,21 +40,18 @@ class _ProfilePageState extends State<ProfilePage> {
             leading: Icon(Icons.edit),
             title: Text('Edit profile picture'),
             onTap: () {
-              // Handle edit profile picture
             },
           ),
           ListTile(
             leading: Icon(Icons.phone),
             title: Text('9999-****'),
             onTap: () {
-              // Handle edit phone number
             },
           ),
           ListTile(
             leading: Icon(Icons.lock),
             title: Text('********'),
             onTap: () {
-              // Handle edit password
             },
           ),
           Divider(),
@@ -62,14 +59,12 @@ class _ProfilePageState extends State<ProfilePage> {
             leading: Icon(Icons.settings),
             title: Text('Settings'),
             onTap: () {
-              // Handle settings
             },
           ),
           ListTile(
             leading: Icon(Icons.delete),
             title: Text('Delete account'),
             onTap: () {
-              // Handle delete account
             },
           ),
           Divider(),
@@ -77,7 +72,6 @@ class _ProfilePageState extends State<ProfilePage> {
             leading: Icon(Icons.logout),
             title: Text('Log Out'),
             onTap: () {
-              // Handle log out
             },
           ),
         ],
