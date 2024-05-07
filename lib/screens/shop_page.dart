@@ -54,6 +54,7 @@ class _ShopPageState extends State<ShopPage> {
                 ),
               ),
             ),
+            automaticallyImplyLeading: false,
           ),
           SliverFillRemaining(
             child: SingleChildScrollView(

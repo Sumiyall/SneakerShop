@@ -14,22 +14,13 @@ class BagsPage extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Login1()),
-                );
-              },
-              color: Colors.black,
-            ),
-            backgroundColor: Colors.white,
+            automaticallyImplyLeading: false,
+            backgroundColor: Color.fromARGB(255, 116, 25, 134),
             title: Text(
               "Сагс цэс",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Color.fromARGB(218, 0, 0, 0),
+                color: Colors.white,
               ),
             ),
             floating: true,

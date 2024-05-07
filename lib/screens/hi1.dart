@@ -20,9 +20,9 @@ class Login1 extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             colors: [
-              Color.fromRGBO(68, 103, 216, 1),
-              Color.fromARGB(255, 81, 159, 248),
-              Color.fromARGB(255, 153, 70, 192)
+              Color.fromARGB(255, 128, 21, 138),
+              Color.fromARGB(255, 221, 16, 240),
+              Color.fromARGB(255, 184, 31, 255)
             ]
           )
         ),
@@ -106,7 +106,7 @@ class Login1 extends StatelessWidget {
                   );
                           },
                           height: 50,
-                          color: Color.fromARGB(255, 40, 134, 211),
+                          color: Color.fromARGB(255, 128, 21, 138),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50),
                           ),
@@ -123,7 +123,7 @@ class Login1 extends StatelessWidget {
                               child: FadeInUp(duration: Duration(milliseconds: 1800), child: MaterialButton(
                                 onPressed: (){},
                                 height: 50,
-                                color: Colors.blue,
+                                color: Color.fromARGB(255, 128, 21, 138),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(50),
                                 ),
@@ -141,7 +141,7 @@ class Login1 extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(50),
 
                                 ),
-                                color: Color.fromARGB(255, 223, 95, 73),
+                                color: Color.fromARGB(255, 128, 21, 138),
                                 child: Center(
                                   child: Text("Google", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
                                 ),

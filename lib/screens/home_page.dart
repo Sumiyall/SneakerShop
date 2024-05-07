@@ -4,8 +4,7 @@ import 'bags_page.dart';
 import 'shop_page.dart';
 import 'categories.dart';
 import 'profile_page.dart';
-import 'hi1.dart';
-
+import 'billing.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -16,12 +15,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
-
   List<Widget> pages = [
     const ShopPage(),
     BagsPage(),
-    const CategoriesPage(),
-    const ProfilePage()
+   
+    BillingPage(),
+    const ProfilePage(),
   ];
 
   void _onTabTapped(int index) {
@@ -37,28 +36,41 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
-        selectedItemColor: Color.fromARGB(255, 116, 25, 134),
-        unselectedItemColor: Colors.grey,
+        backgroundColor: Color.fromARGB(255, 116, 25, 134),
         onTap: _onTabTapped,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopify_sharp),
-            label: 'Дэлгүүр',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_basket_sharp),
-            label: 'Сагс',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.category),
-            label: 'Категориуд',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Хэрэглэгч',
-          ),
+        items: [
+          _buildNavigationBarItem(Icons.window, 'Дэлгүүр', 0),
+          _buildNavigationBarItem(Icons.shopping_basket_outlined, 'Сагс', 1),
+          // _buildNavigationBarItem(Icons.home_outlined, 'Категориуд', 2),
+          _buildNavigationBarItem(Icons.card_travel, 'Хэрэглэгч', 2),
+          _buildNavigationBarItem(Icons.person, 'Billing', 3),
         ],
       ),
     );
   }
+
+  BottomNavigationBarItem _buildNavigationBarItem(
+    IconData icon,
+    String label,
+    int index,
+  ) {
+    return BottomNavigationBarItem(
+    icon: Container(
+      decoration: BoxDecoration(
+        color: _currentIndex == index ? Colors.white : Colors.transparent,
+        shape: BoxShape.rectangle,
+        borderRadius: BorderRadius.circular(16), // Add border radius here
+      ),
+      padding: EdgeInsets.all(12),
+      child: Icon(
+        icon,
+        color: _currentIndex == index
+            ? Color.fromARGB(255, 116, 25, 134)
+            : Colors.white,
+        size: 32,
+      ),
+    ),
+    label: '',
+  );
+}
 }
