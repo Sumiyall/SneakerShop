@@ -11,10 +11,18 @@ class ShopPage extends StatefulWidget {
 
 class _ShopPageState extends State<ShopPage> {
   String selectedChoice = "Men's";
+  String? selectedCategory;
 
   void onChoiceSelected(String choice) {
     setState(() {
       selectedChoice = choice;
+      selectedCategory = null;
+    });
+  }
+
+  void onCategorySelected(String category) {
+    setState(() {
+      selectedCategory = category;
     });
   }
 
@@ -155,7 +163,37 @@ class _ShopPageState extends State<ShopPage> {
                     ),
                   ),
                   SizedBox(height: 16),
-                  SneakerCart(selectedChoice: selectedChoice),
+                  if ((selectedChoice == "Men's" ||
+                        selectedChoice == "Women's" ||
+                        selectedChoice == "Kid's") &&
+                    selectedCategory == null)
+                    CategoryGrid(
+                      categories: [
+                        {
+                          'name': 'Basketball',
+                          'imageUrl':
+                              'https://www.rockstaracademy.com/lib/images/news/basketball.jpeg',
+                        },
+                        {
+                          'name': 'Sale',
+                          'imageUrl': 'https://i.ebayimg.com/images/g/1~8AAOSwvKtY~XTY/s-l1200.jpg',
+                        },
+                        {
+                          'name': 'New',
+                          'imageUrl': 'https://www.jiomart.com/images/product/original/rvue2fhoxv/azeraa-fashion-shoes-for-mens-latest-design-partywear-new-model-trendy-stylish-sneaker-shoe-fashion-shoes-for-mens-high-heel-latest-design-partywear-new-model-trendy-stylish-sneaker-shoe-mens-sneakers-for-men-_803_black_uk-6-product-images-rvue2fhoxv-0-202211070019.jpg',
+                        },
+                        {
+                          'name': 'Top Selling',
+                          'imageUrl':
+                              'https://img.buzzfeed.com/buzzfeed-static/complex/images/Y19jcm9wLGhfMTA2NSx3XzE4OTMseF81MSx5XzY2Mg==/jczrzgiymddftgcdheiu/nike-air-force-1-low-terror-squad-fj5756-100-pair.jpg',
+                        },
+                      ],
+                      onCategorySelected: onCategorySelected,
+                    )
+                  else
+                    SneakerCart(
+                      selectedChoice: selectedChoice,
+                    ),
                 ],
               ),
             ),
@@ -166,61 +204,189 @@ class _ShopPageState extends State<ShopPage> {
   }
 }
 
+class CategoryGrid extends StatelessWidget {
+  final List<Map<String, dynamic>> categories;
+  final Function(String) onCategorySelected;
+
+  const CategoryGrid({
+    required this.categories,
+    required this.onCategorySelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.count(
+      crossAxisCount: 2,
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      children: categories.map((category) {
+        return GestureDetector(
+          onTap: () => onCategorySelected(category['name']),
+          child: Card(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.network(
+                  category['imageUrl'],
+                  height: 100,
+                  width: 100,
+                  fit: BoxFit.cover,
+                ),
+                SizedBox(height: 8),
+                Text(
+                  category['name'],
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      }).toList(),
+    );
+  }
+}
+
 class SneakerCart extends StatelessWidget {
   final String selectedChoice;
+  final String? selectedCategory;
 
-  SneakerCart({required this.selectedChoice});
+  SneakerCart({required this.selectedChoice, this.selectedCategory});
 
   final List<Map<String, dynamic>> sneakers = [
     {
       'name': 'Nike AirForce 1',
       'type': 'Эрэгтэй',
+      'category': 'Basketball',
       'price': 250000,
       'imageUrl':
           'https://media.gq.com/photos/5e4c2c5440e46c00081a1de5/16:9/w_1280,c_limit/3x2.jpg',
     },
     {
-      'name': 'Nike AirForce 1',
+      'name': 'Adidas Superstar',
       'type': 'Эрэгтэй',
-      'price': 250000,
+      'category': 'Basketball',
+      'price': 180000,
       'imageUrl':
-          'https://media.gq.com/photos/5e4c2c5440e46c00081a1de5/16:9/w_1280,c_limit/3x2.jpg',
+          'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/61f87dec481e4512823ea7fb0080ba1a_9366/Superstar_Shoes_White_C77124_01_standard.jpg',
     },
     {
-      'name': 'Nike AirForce 1',
+      'name': 'Nike Air Max 90',
       'type': 'Эрэгтэй',
-      'price': 250000,
+      'category': 'Sale',
+      'price': 200000,
       'imageUrl':
-          'https://media.gq.com/photos/5e4c2c5440e46c00081a1de5/16:9/w_1280,c_limit/3x2.jpg',
+          'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/a0a300da-2e16-4483-ba64-9815cf0598ac/air-max-90-mens-shoes-6n3vKB.png',
     },
     {
-      'name': 'Nike AirForce 1',
+      'name': 'Puma Suede Classic',
       'type': 'Эрэгтэй',
-      'price': 250000,
+      'category': 'Sale',
+      'price': 120000,
       'imageUrl':
-          'https://media.gq.com/photos/5e4c2c5440e46c00081a1de5/16:9/w_1280,c_limit/3x2.jpg',
+          'https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/352634/03/sv01/fnd/PNA/fmt/png/Suede-Classic+-Sneakers',
     },
     {
-      'name': 'Nike AirForce 1',
+      'name': 'Adidas Ultraboost 21',
       'type': 'Эрэгтэй',
-      'price': 250000,
+      'category': 'New',
+      'price': 320000,
       'imageUrl':
-          'https://media.gq.com/photos/5e4c2c5440e46c00081a1de5/16:9/w_1280,c_limit/3x2.jpg',
+          'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/9c7058d8677742ac8519ac3f009cdcf4_9366/Ultraboost_21_Shoes_White_FY0306_01_standard.jpg',
     },
     {
-      'name': 'Nike AirForce 1',
+      'name': 'Nike Zoom Freak 3',
       'type': 'Эрэгтэй',
-      'price': 250000,
+      'category': 'New',
+      'price': 280000,
       'imageUrl':
-          'https://media.gq.com/photos/5e4c2c5440e46c00081a1de5/16:9/w_1280,c_limit/3x2.jpg',
+          'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/ceb498b5-1609-4aae-9917-0b9e6fa53b0b/freak-3-basketball-shoes-B9NrxN.png',
     },
     {
-      'name': 'Nike AirForce 1',
+      'name': 'Nike Air Jordan 1',
       'type': 'Эрэгтэй',
-      'price': 250000,
+      'category': 'Top Selling',
+      'price': 350000,
       'imageUrl':
-          'https://media.gq.com/photos/5e4c2c5440e46c00081a1de5/16:9/w_1280,c_limit/3x2.jpg',
+          'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/ceb498b5-1609-4aae-9917-0b9e6fa53b0b/freak-3-basketball-shoes-B9NrxN.png',
     },
+    {
+      'name': 'Adidas Stan Smith',
+      'type': 'Эрэгтэй',
+      'category': 'Top Selling',
+      'price': 150000,
+      'imageUrl':
+          'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/ceb498b5-1609-4aae-9917-0b9e6fa53b0b/freak-3-basketball-shoes-B9NrxN.png',
+    },
+    {
+      'name': 'Nike Air Max 270',
+      'type': 'Эмэгтэй',
+      'category': 'Basketball',
+      'price': 220000,
+      'imageUrl':
+          'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/i1-6b66deef-8c5a-42ff-8781-be141b989bb2/air-max-270-womens-shoes-Pgb94t.png',
+    },
+    {
+      'name': 'Adidas NMD_R1',
+      'type': 'Эмэгтэй',
+      'category': 'Sale',
+      'price': 190000,
+      'imageUrl':
+          'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/edd3c94e2f3b4e678095aa4a0106abb6_9366/NMD_R1_Shoes_Pink_FV1788_01_standard.jpg',
+    },
+    {
+      'name': 'Puma Cali Sport Mix',
+      'type': 'Эмэгтэй',
+      'category': 'New',
+      'price': 160000,
+      'imageUrl':
+          'https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/374667/01/sv01/fnd/PNA/fmt/png/Cali-Sport-Mix-Women\'s-Sneakers',
+    },
+    {
+      'name': 'New Balance 574',
+      'type': 'Эмэгтэй',
+      'category': 'Top Selling',
+      'price': 180000,
+      'imageUrl':
+          'https://nb.scene7.com/is/ima',
+    },
+
+    // Kid's sneakers
+    {
+      'name': 'Nike Air Max 90',
+      'type': 'Хүүхэд',
+      'category': 'Basketball',
+      'price': 150000,
+      'imageUrl':
+          'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/5b158218-9c65-4309-8635-7b58f3a71b63/air-max-90-older-shoes-1wzwJM.png',
+    },
+    {
+      'name': 'Adidas Superstar',
+      'type': 'Хүүхэд',
+      'category': 'Sale',
+      'price': 120000,
+      'imageUrl':
+          'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/17b5ea4849b147788d97ac1e0121abe9_9366/Superstar_Shoes_White_FU7714_01_standard.jpg',
+    },
+    {
+      'name': 'Puma Suede Classic XXI',
+      'type': 'Хүүхэд',
+      'category': 'New',
+      'price': 100000,
+      'imageUrl':
+          'https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/381173/06/sv01/fnd/PNA/fmt/png/Suede-Classic-XXI-Kids\'-Sneakers',
+    },
+    {
+      'name': 'New Balance 997H',
+      'type': 'Хүүхэд',
+      'category': 'Top Selling',
+      'price': 130000,
+      'imageUrl':
+          'fmt=webp&wid=472&hei=472',
+    },
+    
   ];
 
   @override
@@ -249,13 +415,14 @@ class SneakerCart extends StatelessWidget {
         ],
       );
     } else {
-      // Filter sneakers based on the selected choice
-      List<Map<String, dynamic>> filteredSneakers = sneakers
-          .where((sneaker) =>
-              selectedChoice == "Men's" && sneaker['type'] == 'Эрэгтэй' ||
-              selectedChoice == "Women's" && sneaker['type'] == 'Эмэгтэй' ||
-              selectedChoice == "Kid's" && sneaker['type'] == 'Хүүхэд')
-          .toList();
+      // Filter sneakers based on the selected choice and category
+      List<Map<String, dynamic>> filteredSneakers = sneakers.where((sneaker) {
+        bool matchesChoice = selectedChoice == "Men's" &&
+                sneaker['type'] == 'Эрэгтэй' ||
+            selectedChoice == "Women's" && sneaker['type'] == 'Эмэгтэй' ||
+            selectedChoice == "Kid's" && sneaker['type'] == 'Хүүхэд';
+        return matchesChoice;
+      }).toList();
 
       return GridView.count(
         crossAxisCount: 2,
