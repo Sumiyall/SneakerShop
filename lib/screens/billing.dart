@@ -78,18 +78,43 @@ class _BillingPageState extends State<BillingPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      buildPaymentImage('https://w7.pngwing.com/pngs/553/672/png-transparent-bank-of-mongolia-khan-bank-automated-teller-machine-khanda-leaf-branch-payment-thumbnail.png', 'Bank 1'),
-                      buildPaymentImage('https://is5-ssl.mzstatic.com/image/thumb/Purple124/v4/4a/60/ed/4a60ed7e-3f02-5db7-05bb-2162a944c1d6/source/512x512bb.jpg', 'Bank 2'),
-                      buildPaymentImage('https://cdn6.aptoide.com/imgs/0/6/d/06df97a06fbc7622a775a7c414b69e87_icon.png', 'Bank 3'),
-                      buildPaymentImage('https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/6d/5e/fe/6d5efe98-d03c-0eb5-0550-661653e184cf/AppIcon-0-0-1x_U007emarketing-0-7-0-0-85-220.png/230x0w.webp', 'Bank 4'),
-                      buildPaymentImage('https://upload.wikimedia.org/wikipedia/commons/a/a4/Paypal_2014_logo.png', 'Bank 5'),
+                      buildPaymentImage('https://w7.pngwing.com/pngs/553/672/png-transparent-bank-of-mongolia-khan-bank-automated-teller-machine-khanda-leaf-branch-payment-thumbnail.png', 'Khan Bank'),
+                      buildPaymentImage('https://is5-ssl.mzstatic.com/image/thumb/Purple124/v4/4a/60/ed/4a60ed7e-3f02-5db7-05bb-2162a944c1d6/source/512x512bb.jpg', 'Golomt Bank'),
+                      buildPaymentImage('https://cdn6.aptoide.com/imgs/0/6/d/06df97a06fbc7622a775a7c414b69e87_icon.png', 'Xac Bank'),
+                      buildPaymentImage('https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/6d/5e/fe/6d5efe98-d03c-0eb5-0550-661653e184cf/AppIcon-0-0-1x_U007emarketing-0-7-0-0-85-220.png/230x0w.webp', 'TDB'),
+                      buildPaymentImage('https://upload.wikimedia.org/wikipedia/commons/a/a4/Paypal_2014_logo.png', 'Pay Pal'),
                     ],
                   ),
                   SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: selectedPayment != null
                         ? () {
-                            print('Selected Payment: $selectedPayment');
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Open Bank App'),
+                                  content: Text('Do you want to open the ${selectedPayment} app?'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('Cancel'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        // Open the selected bank app
+                                        // You can add your logic here to open the bank app
+                                        print('Opening ${selectedPayment} app...');
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('Open'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
                           }
                         : null,
                     style: ElevatedButton.styleFrom(
