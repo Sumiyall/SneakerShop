@@ -14,16 +14,49 @@ class _NewsPageState extends State<NewsPage> {
       'name': 'Nike Air Max 90',
       'type': "Men's",
       'price': '200,000₮',
-      'imageUrl': 'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/a0a300da-2e16-4483-ba64-9815cf0598ac/air-max-90-mens-shoes-6n3vKB.png',
+      'imageUrl':
+          'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/a0a300da-2e16-4483-ba64-9815cf0598ac/air-max-90-mens-shoes-6n3vKB.png',
     },
     {
       'date': 'Apr 18, 2024',
       'name': 'Adidas Ultraboost',
       'type': "Women's",
       'price': '180,000₮',
-      'imageUrl': 'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/a0a300da-2e16-4483-ba64-9815cf0598ac/air-max-90-mens-shoes-6n3vKB.png',
+      'imageUrl':
+          'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/a0a300da-2e16-4483-ba64-9815cf0598ac/air-max-90-mens-shoes-6n3vKB.png',
     },
-    // Add more upcoming news items
+    {
+      'date': 'Apr 17, 2024',
+      'name': 'Nike Air Max 90',
+      'type': "Men's",
+      'price': '200,000₮',
+      'imageUrl':
+          'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/a0a300da-2e16-4483-ba64-9815cf0598ac/air-max-90-mens-shoes-6n3vKB.png',
+    },
+    {
+      'date': 'Apr 18, 2024',
+      'name': 'Adidas Ultraboost',
+      'type': "Women's",
+      'price': '180,000₮',
+      'imageUrl':
+          'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/a0a300da-2e16-4483-ba64-9815cf0598ac/air-max-90-mens-shoes-6n3vKB.png',
+    },
+    {
+      'date': 'Apr 17, 2024',
+      'name': 'Nike Air Max 90',
+      'type': "Men's",
+      'price': '200,000₮',
+      'imageUrl':
+          'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/a0a300da-2e16-4483-ba64-9815cf0598ac/air-max-90-mens-shoes-6n3vKB.png',
+    },
+    {
+      'date': 'Apr 18, 2024',
+      'name': 'Adidas Ultraboost',
+      'type': "Women's",
+      'price': '180,000₮',
+      'imageUrl':
+          'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/a0a300da-2e16-4483-ba64-9815cf0598ac/air-max-90-mens-shoes-6n3vKB.png',
+    },
   ];
 
   final List<Map<String, String>> popularNews = [
@@ -32,16 +65,33 @@ class _NewsPageState extends State<NewsPage> {
       'name': 'Nike Air Jordan 1',
       'type': "Men's",
       'price': '250,000₮',
-      'imageUrl': 'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/a0a300da-2e16-4483-ba64-9815cf0598ac/air-max-90-mens-shoes-6n3vKB.png',
+      'imageUrl':
+          'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/a0a300da-2e16-4483-ba64-9815cf0598ac/air-max-90-mens-shoes-6n3vKB.png',
     },
     {
       'date': 'Apr 14, 2024',
       'name': 'Puma Suede Classic',
       'type': "Women's",
       'price': '120,000₮',
-      'imageUrl': 'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/a0a300da-2e16-4483-ba64-9815cf0598ac/air-max-90-mens-shoes-6n3vKB.png',
+      'imageUrl':
+          'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/a0a300da-2e16-4483-ba64-9815cf0598ac/air-max-90-mens-shoes-6n3vKB.png',
     },
-    // Add more popular news items
+    {
+      'date': 'Apr 15, 2024',
+      'name': 'Nike Air Jordan 1',
+      'type': "Men's",
+      'price': '250,000₮',
+      'imageUrl':
+          'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/a0a300da-2e16-4483-ba64-9815cf0598ac/air-max-90-mens-shoes-6n3vKB.png',
+    },
+    {
+      'date': 'Apr 14, 2024',
+      'name': 'Puma Suede Classic',
+      'type': "Women's",
+      'price': '120,000₮',
+      'imageUrl':
+          'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/a0a300da-2e16-4483-ba64-9815cf0598ac/air-max-90-mens-shoes-6n3vKB.png',
+    },
   ];
 
   void onChoiceSelected(String choice) {
@@ -54,11 +104,12 @@ class _NewsPageState extends State<NewsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
+        physics: BouncingScrollPhysics(),
         slivers: [
           SliverAppBar(
             backgroundColor: Color.fromARGB(255, 128, 21, 138),
             title: Text(
-              "Гутлын дэлгүүр",
+              "News",
               style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
             ),
             floating: true,
@@ -78,7 +129,8 @@ class _NewsPageState extends State<NewsPage> {
                     ),
                     filled: true,
                     fillColor: Colors.white,
-                    prefixIcon: Icon(Icons.search, color: Colors.black, size: 24),
+                    prefixIcon:
+                        Icon(Icons.search, color: Colors.black, size: 24),
                     contentPadding: EdgeInsets.symmetric(vertical: 0),
                   ),
                   style: TextStyle(color: Colors.black, fontSize: 12),
@@ -164,51 +216,154 @@ class _NewsPageState extends State<NewsPage> {
     String price,
     String imageUrl,
   ) {
-    return Card(
-      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => NewsDetailPage(
+              date: date,
+              name: name,
+              type: type,
+              price: price,
+              imageUrl: imageUrl,
+            ),
+          ),
+        );
+      },
+      child: Card(
+        margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        elevation: 4,
+        child: Padding(
+          padding: EdgeInsets.all(12),
+          child: Row(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.network(
+                  imageUrl,
+                  height: 80,
+                  width: 80,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      date,
+                      style: TextStyle(fontSize: 12, color: Colors.grey),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      name,
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      type,
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      price,
+                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
-      elevation: 4,
-      child: Padding(
-        padding: EdgeInsets.all(12),
-        child: Row(
+    );
+  }
+}
+
+class NewsDetailPage extends StatelessWidget {
+  final String date;
+  final String name;
+  final String type;
+  final String price;
+  final String imageUrl;
+
+  const NewsDetailPage({
+    required this.date,
+    required this.name,
+    required this.type,
+    required this.price,
+    required this.imageUrl,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    TextStyle detailsTextStyle = TextStyle(
+      fontSize: 18.0,
+      fontWeight: FontWeight.bold,
+      color: Colors.grey.shade800,
+    );
+
+    Color accentColor = Color.fromARGB(255, 128, 21, 138);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(name),
+        backgroundColor: accentColor,
+      ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.network(
-                imageUrl,
-                height: 80,
-                width: 80,
-                fit: BoxFit.cover,
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16.0),
+                child: Image.network(
+                  imageUrl,
+                  height: 300,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-            SizedBox(width: 16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    date,
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
-                  SizedBox(height: 4),
-                  Text(
-                    name,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 4),
-                  Text(
-                    type,
-                    style: TextStyle(fontSize: 12),
-                  ),
-                  SizedBox(height: 4),
-                  Text(
-                    price,
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                  ),
-                ],
+            Divider(
+              height: 32.0,
+              thickness: 1.0,
+              color: Colors.grey.shade400,
+            ),
+            Text(
+              date,
+              style: detailsTextStyle,
+            ),
+            SizedBox(height: 8),
+            Text(
+              name,
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: accentColor,
               ),
+            ),
+            SizedBox(height: 8),
+            Text(
+              type,
+              style: detailsTextStyle,
+            ),
+            SizedBox(height: 8),
+            Text(
+              price,
+              style: detailsTextStyle,
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nulla sit amet aliquam lacinia, nisl nisl aliquam nisl, nec aliquam nisl nisl sit amet nisl. Nullam euismod, nulla sit amet aliquam lacinia, nisl nisl aliquam nisl, nec aliquam nisl nisl sit amet nisl.',
+              style: TextStyle(fontSize: 16),
             ),
           ],
         ),
