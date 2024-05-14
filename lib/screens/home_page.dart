@@ -5,6 +5,7 @@ import 'shop_page.dart';
 import 'categories.dart';
 import 'profile_page.dart';
 import 'billing.dart';
+import 'news.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -17,8 +18,7 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
   List<Widget> pages = [
     const ShopPage(),
-    BagsPage(),
-   
+    NewsPage(),
     BillingPage(),
     const ProfilePage(),
   ];
@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
         onTap: _onTabTapped,
         items: [
           _buildNavigationBarItem(Icons.window, 'Дэлгүүр', 0),
-          _buildNavigationBarItem(Icons.shopping_basket_outlined, 'Сагс', 1),
+          _buildNavigationBarItem(Icons.newspaper_outlined, 'Сагс', 1),
           // _buildNavigationBarItem(Icons.home_outlined, 'Категориуд', 2),
           _buildNavigationBarItem(Icons.card_travel, 'Хэрэглэгч', 2),
           _buildNavigationBarItem(Icons.person, 'Billing', 3),

@@ -32,38 +32,37 @@ class _ShopPageState extends State<ShopPage> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            backgroundColor: Color.fromARGB(255, 128, 21, 138),
-            title: Text(
-              "Гутлын дэлгүүр",
-              style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-            ),
-            floating: true,
-            pinned: true,
-            bottom: PreferredSize(
-              preferredSize: Size.fromHeight(40),
-              child: Container(
-                color: Color.fromARGB(255, 128, 21, 138),
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Search',
-                    hintStyle: TextStyle(color: Colors.white),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide.none,
-                    ),
-                    filled: true,
-                    fillColor: Colors.white24,
-                    prefixIcon:
-                        Icon(Icons.search, color: Colors.white, size: 20),
-                    contentPadding: EdgeInsets.symmetric(vertical: 8),
-                  ),
-                  style: TextStyle(color: Colors.white, fontSize: 14),
-                ),
-              ),
-            ),
-            automaticallyImplyLeading: false,
+  backgroundColor: Color.fromARGB(255, 128, 21, 138),
+  title: Text(
+    "Гутлын дэлгүүр",
+    style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+  ),
+  floating: true,
+  pinned: true,
+  bottom: PreferredSize(
+    preferredSize: Size.fromHeight(55),
+    child: Container(
+      color: Color.fromARGB(255, 128, 21, 138),
+      padding: EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+      child: TextField(
+        decoration: InputDecoration(
+          hintText: 'Search',
+          hintStyle: TextStyle(color: Colors.black),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
+            borderSide: BorderSide.none,
           ),
+          filled: true,
+          fillColor: Colors.white,
+          prefixIcon: Icon(Icons.search, color: Colors.black, size: 24),
+          contentPadding: EdgeInsets.symmetric(vertical: 0),
+        ),
+        style: TextStyle(color: Colors.black, fontSize: 12),
+      ),
+    ),
+  ),
+  automaticallyImplyLeading: false,
+),
           SliverFillRemaining(
             child: SingleChildScrollView(
               child: Column(
