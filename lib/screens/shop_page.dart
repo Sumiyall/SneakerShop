@@ -451,7 +451,6 @@ class SneakerCart extends StatelessWidget {
         ],
       );
     } else {
-      // Filter sneakers based on the selected choice and category
       List<Map<String, dynamic>> filteredSneakers = sneakers.where((sneaker) {
         bool matchesChoice = selectedChoice == "Men's" &&
                 sneaker['type'] == 'Эрэгтэй' ||
@@ -461,57 +460,94 @@ class SneakerCart extends StatelessWidget {
       }).toList();
 
       return GridView.count(
-        crossAxisCount: 2,
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        children: filteredSneakers.map((sneaker) {
-          return Container(
-            height: 300,
-            child: Card(
+  crossAxisCount: 2,
+  shrinkWrap: true,
+  physics: NeverScrollableScrollPhysics(),
+  children: filteredSneakers.map((sneaker) {
+    return Container(
+      height: 300,
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        elevation: 5,
+        child: Column(
+          children: [
+            Expanded(
+              child: ClipRRect(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(15.0)),
+                child: Image.network(
+                  sneaker['imageUrl']!,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: Image.network(
-                      sneaker['imageUrl']!,
-                      fit: BoxFit.cover,
+                  Text(
+                    sneaker['name']!,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(sneaker['name']!),
-                        Text(sneaker['type']!),
-                        sneaker['price'] != null
-                            ? Text('${sneaker['price']}₮')
-                            : Text('Price on request'),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    ProductDetailsPage(product: sneaker),
-                              ),
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.purple,
-                          ),
-                          child: sneaker['price'] != null
-                              ? Text('Дэлгэрэнгүй')
-                              : Text('Дэлгэрэнгүй'),
-                        ),
-                      ],
+                  SizedBox(height: 4),
+                  Text(
+                    sneaker['type']!,
+                    style: TextStyle(
+                      color: Colors.grey[600],
                     ),
+                  ),
+                  SizedBox(height: 8),
+                  sneaker['price'] != null
+                      ? Text(
+                          '${sneaker['price']}₮',
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )
+                      : Text(
+                          'More Details',
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                  SizedBox(height: 8),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              ProductDetailsPage(product: sneaker),
+                        ),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.purple,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                    ),
+                    child: Text('  More Details'),
                   ),
                 ],
               ),
             ),
-          );
-        }).toList(),
-      );
+          ],
+        ),
+      ),
+    );
+  }).toList(),
+);
+
     }
   }
 }
