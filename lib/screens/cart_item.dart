@@ -10,6 +10,6 @@ class CartItem {
     required this.name,
     required this.imageUrl,
     required this.type,
-    this.price,
+    this.price, String? size,
   });
 }

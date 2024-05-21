@@ -16,6 +16,7 @@ class _ProfilePageState extends State<ProfilePage> {
         title: Text('Profile'),
         backgroundColor: Color.fromARGB(255, 128, 21, 138),
         automaticallyImplyLeading: false,
+        centerTitle: true,
       ),
       body: Column(
         children: [

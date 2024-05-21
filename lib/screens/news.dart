@@ -112,6 +112,7 @@ class _NewsPageState extends State<NewsPage> {
               "News",
               style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
             ),
+            centerTitle: true,
             floating: true,
             pinned: true,
             bottom: PreferredSize(

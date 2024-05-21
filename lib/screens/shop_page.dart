@@ -32,37 +32,38 @@ class _ShopPageState extends State<ShopPage> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-  backgroundColor: Color.fromARGB(255, 128, 21, 138),
-  title: Text(
-    "Sneaker Shop",
-    style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-  ),
-  floating: true,
-  pinned: true,
-  bottom: PreferredSize(
-    preferredSize: Size.fromHeight(55),
-    child: Container(
-      color: Color.fromARGB(255, 128, 21, 138),
-      padding: EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-      child: TextField(
-        decoration: InputDecoration(
-          hintText: 'Search',
-          hintStyle: TextStyle(color: Colors.black),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-            borderSide: BorderSide.none,
+            backgroundColor: Color.fromARGB(255, 128, 21, 138),
+            title: Text(
+              "Sneaker Shop",
+              style: TextStyle(fontSize: 23, fontWeight:FontWeight.bold ,color: Color.fromARGB(255, 255, 255, 255)),
+            ),
+            centerTitle: true,
+            floating: true,
+            pinned: true,
+            bottom: PreferredSize(
+              preferredSize: Size.fromHeight(55),
+              child: Container(
+                color: Color.fromARGB(255, 128, 21, 138),
+                padding: EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Search',
+                    hintStyle: TextStyle(color: Colors.black),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide.none,
+                    ),
+                    filled: true,
+                    fillColor: Colors.white,
+                    prefixIcon: Icon(Icons.search, color: Colors.black, size: 24),
+                    contentPadding: EdgeInsets.symmetric(vertical: 0),
+                  ),
+                  style: TextStyle(color: Colors.black, fontSize: 12),
+                ),
+              ),
+            ),
+            automaticallyImplyLeading: false,
           ),
-          filled: true,
-          fillColor: Colors.white,
-          prefixIcon: Icon(Icons.search, color: Colors.black, size: 24),
-          contentPadding: EdgeInsets.symmetric(vertical: 0),
-        ),
-        style: TextStyle(color: Colors.black, fontSize: 12),
-      ),
-    ),
-  ),
-  automaticallyImplyLeading: false,
-),
           SliverFillRemaining(
             child: SingleChildScrollView(
               child: Column(
@@ -464,7 +465,16 @@ class SneakerCart extends StatelessWidget {
   shrinkWrap: true,
   physics: NeverScrollableScrollPhysics(),
   children: filteredSneakers.map((sneaker) {
-    return Container(
+  return GestureDetector(
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ProductDetailsPage(product: sneaker),
+        ),
+      );
+    },
+    child: Container(
       height: 300,
       padding: const EdgeInsets.all(8.0),
       child: Card(
@@ -473,6 +483,7 @@ class SneakerCart extends StatelessWidget {
         ),
         elevation: 5,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
               child: ClipRRect(
@@ -485,7 +496,7 @@ class SneakerCart extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(12.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -512,40 +523,16 @@ class SneakerCart extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         )
-                      : Text(
-                          'More Details',
-                          style: TextStyle(
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                  SizedBox(height: 8),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              ProductDetailsPage(product: sneaker),
-                        ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.purple,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                    ),
-                    child: Text('  More Details'),
-                  ),
+                      : SizedBox(),
                 ],
               ),
             ),
           ],
         ),
       ),
-    );
-  }).toList(),
+    ),
+  );
+}).toList(),
 );
 
     }

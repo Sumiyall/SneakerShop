@@ -3,9 +3,16 @@ import 'package:provider/provider.dart';
 import 'package:shop_app/screens/cart_item.dart';
 import 'package:shop_app/screens/cart_provider.dart';
 
-class ProductDetailsPage extends StatelessWidget {
+class ProductDetailsPage extends StatefulWidget {
   final Map<String, dynamic> product;
   const ProductDetailsPage({Key? key, required this.product}) : super(key: key);
+
+  @override
+  _ProductDetailsPageState createState() => _ProductDetailsPageState();
+}
+
+class _ProductDetailsPageState extends State<ProductDetailsPage> {
+  String? selectedSize;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +32,7 @@ class ProductDetailsPage extends StatelessWidget {
               "Бүтээгдэхүүний дэлгэрэнгүй",
               style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
             ),
+            centerTitle: true,
             floating: true,
             pinned: true,
           ),
@@ -35,7 +43,7 @@ class ProductDetailsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    product['name'],
+                    widget.product['name'],
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -43,17 +51,17 @@ class ProductDetailsPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 16),
-                  Image.network(product['imageUrl']),
+                  Image.network(widget.product['imageUrl']),
                   SizedBox(height: 16),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
-                        buildImageThumbnail(product['imageUrl']),
-                        buildImageThumbnail(product['imageUrl']),
-                        buildImageThumbnail(product['imageUrl']),
-                        buildImageThumbnail(product['imageUrl']),
-                        // buildImageThumbnail(product['imageUrl']),
+                        buildImageThumbnail(widget.product['imageUrl']),
+                        buildImageThumbnail(widget.product['imageUrl']),
+                        buildImageThumbnail(widget.product['imageUrl']),
+                        buildImageThumbnail(widget.product['imageUrl']),
+                        // buildImageThumbnail(widget.product['imageUrl']),
                       ],
                     ),
                   ),
@@ -65,7 +73,7 @@ class ProductDetailsPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
-                      'Type: ${product['type']}',
+                      'Type: ${widget.product['type']}',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -80,9 +88,9 @@ class ProductDetailsPage extends StatelessWidget {
                       color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: product['price'] != null
+                    child: widget.product['price'] != null
                         ? Text(
-                            'Price: ${product['price']}₮',
+                            'Price: ${widget.product['price']}₮',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -98,7 +106,40 @@ class ProductDetailsPage extends StatelessWidget {
                             ),
                           ),
                   ),
-                  SizedBox(height: 32),
+                 SizedBox(height: 16),
+Text(
+  'Choose Size',
+  style: TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+  ),
+),
+SizedBox(height: 8),
+Column(
+  crossAxisAlignment: CrossAxisAlignment.center,
+  children: [
+    Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        buildSizeChip('28'),
+        buildSizeChip('30'),
+        buildSizeChip('32'),
+        buildSizeChip('34'),
+      ],
+    ),
+    SizedBox(height: 8),
+    Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        buildSizeChip('36'),
+        buildSizeChip('38'),
+        buildSizeChip('40'),
+        buildSizeChip('42'),
+      ],
+    ),
+  ],
+),
+SizedBox(height: 32),
                 ],
               ),
             ),
@@ -112,10 +153,11 @@ class ProductDetailsPage extends StatelessWidget {
             final cartProvider = context.read<CartProvider>();
             cartProvider.addToCart(
               CartItem(
-                name: product['name'],
-                imageUrl: product['imageUrl'],
-                type: product['type'],
-                price: product['price'],
+                name: widget.product['name'],
+                imageUrl: widget.product['imageUrl'],
+                type: widget.product['type'],
+                price: widget.product['price'],
+                size: selectedSize,
               ),
             );
             Navigator.pop(context);
@@ -152,4 +194,36 @@ class ProductDetailsPage extends StatelessWidget {
       ),
     );
   }
+
+  Widget buildSizeChip(String size) {
+  return Container(
+    margin: EdgeInsets.symmetric(horizontal: 4),
+    child: ChoiceChip(
+      label: Text(
+        size,
+        style: TextStyle(
+          color: selectedSize == size ? Colors.white : Colors.black,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      selected: selectedSize == size,
+      onSelected: (selected) {
+        setState(() {
+          selectedSize = selected ? size : null;
+        });
+      },
+      backgroundColor: Colors.grey[200],
+      selectedColor: Colors.purple,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+        side: BorderSide(
+          color: selectedSize == size ? Colors.purple : Colors.grey[400]!,
+          width: 2,
+        ),
+      ),
+      elevation: 2,
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    ),
+  );
+}
 }

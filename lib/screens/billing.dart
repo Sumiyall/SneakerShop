@@ -25,6 +25,7 @@ class _BillingPageState extends State<BillingPage> {
         title: Text('Billing'),
         backgroundColor: Color.fromARGB(255, 116, 25, 134),
         automaticallyImplyLeading: false,
+        centerTitle: true,
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
