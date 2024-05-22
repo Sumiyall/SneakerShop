@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class NewsPage extends StatefulWidget {
   @override
@@ -94,6 +95,16 @@ class _NewsPageState extends State<NewsPage> {
     },
   ];
 
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Color.fromARGB(255, 128, 21, 138),
+      statusBarIconBrightness: Brightness.light, // For Android
+      statusBarBrightness: Brightness.dark, // For iOS
+    ));
+  }
+
   void onChoiceSelected(String choice) {
     setState(() {
       selectedChoice = choice;
@@ -103,79 +114,81 @@ class _NewsPageState extends State<NewsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        physics: BouncingScrollPhysics(),
-        slivers: [
-          SliverAppBar(
-            backgroundColor: Color.fromARGB(255, 128, 21, 138),
-            title: Text(
-              "News",
-              style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+      body: SafeArea(
+        child: Column(
+          children: [
+            PreferredSize(
+              preferredSize: Size.fromHeight(55.0),
+              child: AppBar(
+                backgroundColor: Color.fromARGB(255, 128, 21, 138),
+                title: Text(
+                  "News",
+                  style: TextStyle(color: Colors.white),
+                ),
+                centerTitle: true,
+                automaticallyImplyLeading: false,
+                
+              ),
             ),
-            centerTitle: true,
-            floating: true,
-            pinned: true,
-            bottom: PreferredSize(
-              preferredSize: Size.fromHeight(55),
-              child: Container(
-                color: Color.fromARGB(255, 128, 21, 138),
-                padding: EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Search',
-                    hintStyle: TextStyle(color: Colors.black),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide.none,
+            
+            // Container(
+            //   color: Color.fromARGB(255, 128, 21, 138),
+            //     padding: EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+            //     child: TextField(
+            //       decoration: InputDecoration(
+            //         hintText: 'Search',
+            //         hintStyle: TextStyle(color: Colors.black),
+            //         border: OutlineInputBorder(
+            //           borderRadius: BorderRadius.circular(20),
+            //           borderSide: BorderSide.none,
+            //         ),
+            //         filled: true,
+            //         fillColor: Colors.white,
+            //         prefixIcon: Icon(Icons.search, color: Colors.black, size: 24),
+            //         contentPadding: EdgeInsets.symmetric(vertical: 0),
+            //       ),
+            //       style: TextStyle(color: Colors.black, fontSize: 12),
+            //     ),
+            // ),
+            SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                buildChoiceChip('Upcoming'),
+                buildChoiceChip('Popular'),
+              ],
+            ),
+            SizedBox(height: 16),
+            Expanded(
+              child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: Column(
+                  children: [
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: selectedChoice == 'Upcoming'
+                          ? upcomingNews.length
+                          : popularNews.length,
+                      itemBuilder: (context, index) {
+                        final newsItem = selectedChoice == 'Upcoming'
+                            ? upcomingNews[index]
+                            : popularNews[index];
+                        return buildNewsCard(
+                          newsItem['date']!,
+                          newsItem['name']!,
+                          newsItem['type']!,
+                          newsItem['price']!,
+                          newsItem['imageUrl']!,
+                        );
+                      },
                     ),
-                    filled: true,
-                    fillColor: Colors.white,
-                    prefixIcon:
-                        Icon(Icons.search, color: Colors.black, size: 24),
-                    contentPadding: EdgeInsets.symmetric(vertical: 0),
-                  ),
-                  style: TextStyle(color: Colors.black, fontSize: 12),
+                  ],
                 ),
               ),
             ),
-            automaticallyImplyLeading: false,
-          ),
-          SliverToBoxAdapter(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    buildChoiceChip('Upcoming'),
-                    buildChoiceChip('Popular'),
-                  ],
-                ),
-                SizedBox(height: 16),
-              ],
-            ),
-          ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                final newsItem = selectedChoice == 'Upcoming'
-                    ? upcomingNews[index]
-                    : popularNews[index];
-                return buildNewsCard(
-                  newsItem['date']!,
-                  newsItem['name']!,
-                  newsItem['type']!,
-                  newsItem['price']!,
-                  newsItem['imageUrl']!,
-                );
-              },
-              childCount: selectedChoice == 'Upcoming'
-                  ? upcomingNews.length
-                  : popularNews.length,
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -201,7 +214,7 @@ class _NewsPageState extends State<NewsPage> {
               label,
               style: TextStyle(
                 color: isSelected ? Colors.purple : Colors.black,
-                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                fontSize: 16,
               ),
             ),
           ),
@@ -210,13 +223,8 @@ class _NewsPageState extends State<NewsPage> {
     );
   }
 
-  Widget buildNewsCard(
-    String date,
-    String name,
-    String type,
-    String price,
-    String imageUrl,
-  ) {
+  Widget buildNewsCard(String date, String name, String type, String price,
+      String imageUrl) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -263,7 +271,8 @@ class _NewsPageState extends State<NewsPage> {
                     SizedBox(height: 4),
                     Text(
                       name,
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 4),
                     Text(
@@ -273,7 +282,8 @@ class _NewsPageState extends State<NewsPage> {
                     SizedBox(height: 4),
                     Text(
                       price,
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),

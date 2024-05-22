@@ -167,28 +167,31 @@ class _ShopPageState extends State<ShopPage> {
                         selectedChoice == "Women's" ||
                         selectedChoice == "Kid's") &&
                     selectedCategory == null)
-                    CategoryGrid(
-                      categories: [
-                        {
-                          'name': 'Basketball',
-                          'imageUrl':
-                              'https://www.rockstaracademy.com/lib/images/news/basketball.jpeg',
-                        },
-                        {
-                          'name': 'Sale',
-                          'imageUrl': 'https://i.ebayimg.com/images/g/1~8AAOSwvKtY~XTY/s-l1200.jpg',
-                        },
-                        {
-                          'name': 'New',
-                          'imageUrl': 'https://www.jiomart.com/images/product/original/rvue2fhoxv/azeraa-fashion-shoes-for-mens-latest-design-partywear-new-model-trendy-stylish-sneaker-shoe-fashion-shoes-for-mens-high-heel-latest-design-partywear-new-model-trendy-stylish-sneaker-shoe-mens-sneakers-for-men-_803_black_uk-6-product-images-rvue2fhoxv-0-202211070019.jpg',
-                        },
-                        {
-                          'name': 'Top Selling',
-                          'imageUrl':
-                              'https://img.buzzfeed.com/buzzfeed-static/complex/images/Y19jcm9wLGhfMTA2NSx3XzE4OTMseF81MSx5XzY2Mg==/jczrzgiymddftgcdheiu/nike-air-force-1-low-terror-squad-fj5756-100-pair.jpg',
-                        },
-                      ],
-                      onCategorySelected: onCategorySelected,
+                    SingleChildScrollView(
+                      physics: NeverScrollableScrollPhysics(),
+                      child: CategoryGrid(
+                        categories: [
+                          {
+                            'name': 'Basketball',
+                            'imageUrl':
+                                'https://www.rockstaracademy.com/lib/images/news/basketball.jpeg',
+                          },
+                          {
+                            'name': 'Sale',
+                            'imageUrl': 'https://i.ebayimg.com/images/g/1~8AAOSwvKtY~XTY/s-l1200.jpg',
+                          },
+                          {
+                            'name': 'New',
+                            'imageUrl': 'https://www.jiomart.com/images/product/original/rvue2fhoxv/azeraa-fashion-shoes-for-mens-latest-design-partywear-new-model-trendy-stylish-sneaker-shoe-fashion-shoes-for-mens-high-heel-latest-design-partywear-new-model-trendy-stylish-sneaker-shoe-mens-sneakers-for-men-_803_black_uk-6-product-images-rvue2fhoxv-0-202211070019.jpg',
+                          },
+                          {
+                            'name': 'Top Selling',
+                            'imageUrl':
+                                'https://img.buzzfeed.com/buzzfeed-static/complex/images/Y19jcm9wLGhfMTA2NSx3XzE4OTMseF81MSx5XzY2Mg==/jczrzgiymddftgcdheiu/nike-air-force-1-low-terror-squad-fj5756-100-pair.jpg',
+                          },
+                        ],
+                        onCategorySelected: onCategorySelected,
+                      ),
                     )
                   else
                     SneakerCart(
@@ -215,73 +218,75 @@ class CategoryGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 1.2,
-        crossAxisSpacing: 16,
-        mainAxisSpacing: 16,
-      ),
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      padding: EdgeInsets.all(16),
-      itemCount: categories.length,
-      itemBuilder: (context, index) {
-        final category = categories[index];
-        return GestureDetector(
-          onTap: () => onCategorySelected(category['name']),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.2),
-                  blurRadius: 4,
-                  offset: Offset(0, 2),
-                ),
-              ],
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: Stack(
-                children: [
-                  Image.network(
-                    category['imageUrl'],
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                    height: double.infinity,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Colors.transparent,
-                          Colors.black.withOpacity(0.7),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 16,
-                    left: 16,
-                    right: 16,
-                    child: Text(
-                      category['name'],
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.6, // Set a fixed height
+      child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 1.2,
+          crossAxisSpacing: 16,
+          mainAxisSpacing: 16,
+        ),
+        physics: NeverScrollableScrollPhysics(), // Disable scrolling
+        padding: EdgeInsets.all(16),
+        itemCount: categories.length,
+        itemBuilder: (context, index) {
+          final category = categories[index];
+          return GestureDetector(
+            onTap: () => onCategorySelected(category['name']),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    blurRadius: 4,
+                    offset: Offset(0, 2),
                   ),
                 ],
               ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Stack(
+                  children: [
+                    Image.network(
+                      category['imageUrl'],
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: double.infinity,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.transparent,
+                            Colors.black.withOpacity(0.7),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 16,
+                      left: 16,
+                      right: 16,
+                      child: Text(
+                        category['name'],
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
@@ -363,7 +368,7 @@ class SneakerCart extends StatelessWidget {
       'category': 'Basketball',
       'price': 220000,
       'imageUrl':
-          'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/i1-6b66deef-8c5a-42ff-8781-be141b989bb2/air-max-270-womens-shoes-Pgb94t.png',
+          'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/ceb498b5-1609-4aae-9917-0b9e6fa53b0b/freak-3-basketball-shoes-B9NrxN.png',
     },
     {
       'name': 'Adidas NMD_R1',
@@ -371,7 +376,7 @@ class SneakerCart extends StatelessWidget {
       'category': 'Sale',
       'price': 190000,
       'imageUrl':
-          'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/edd3c94e2f3b4e678095aa4a0106abb6_9366/NMD_R1_Shoes_Pink_FV1788_01_standard.jpg',
+          'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/a0a300da-2e16-4483-ba64-9815cf0598ac/air-max-90-mens-shoes-6n3vKB.png',
     },
     {
       'name': 'Puma Cali Sport Mix',
@@ -387,7 +392,39 @@ class SneakerCart extends StatelessWidget {
       'category': 'Top Selling',
       'price': 180000,
       'imageUrl':
-          'https://nb.scene7.com/is/ima',
+          'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/61f87dec481e4512823ea7fb0080ba1a_9366/Superstar_Shoes_White_C77124_01_standard.jpg',
+    },
+    {
+      'name': 'Nike Air Max 270',
+      'type': 'Эмэгтэй',
+      'category': 'Basketball',
+      'price': 220000,
+      'imageUrl':
+          'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/ceb498b5-1609-4aae-9917-0b9e6fa53b0b/freak-3-basketball-shoes-B9NrxN.png',
+    },
+    {
+      'name': 'Adidas NMD_R1',
+      'type': 'Эмэгтэй',
+      'category': 'Sale',
+      'price': 190000,
+      'imageUrl':
+          'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/a0a300da-2e16-4483-ba64-9815cf0598ac/air-max-90-mens-shoes-6n3vKB.png',
+    },
+    {
+      'name': 'Puma Cali Sport Mix',
+      'type': 'Эмэгтэй',
+      'category': 'New',
+      'price': 160000,
+      'imageUrl':
+          'https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/374667/01/sv01/fnd/PNA/fmt/png/Cali-Sport-Mix-Women\'s-Sneakers',
+    },
+    {
+      'name': 'New Balance 574',
+      'type': 'Эмэгтэй',
+      'category': 'Top Selling',
+      'price': 180000,
+      'imageUrl':
+          'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/61f87dec481e4512823ea7fb0080ba1a_9366/Superstar_Shoes_White_C77124_01_standard.jpg',
     },
 
     // Kid's sneakers
@@ -397,7 +434,7 @@ class SneakerCart extends StatelessWidget {
       'category': 'Basketball',
       'price': 150000,
       'imageUrl':
-          'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/5b158218-9c65-4309-8635-7b58f3a71b63/air-max-90-older-shoes-1wzwJM.png',
+          'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/1397d932-3fae-4932-859e-521de1721fdc/infinity-flow-big-kids-running-shoes-2fM32q.png',
     },
     {
       'name': 'Adidas Superstar',
@@ -405,7 +442,7 @@ class SneakerCart extends StatelessWidget {
       'category': 'Sale',
       'price': 120000,
       'imageUrl':
-          'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/17b5ea4849b147788d97ac1e0121abe9_9366/Superstar_Shoes_White_FU7714_01_standard.jpg',
+          'https://cdn.mall.adeptmind.ai/https%3A%2F%2Fimages.footlocker.com%2Fis%2Fimage%2FEBFL2%2FD7784602%3Fwid%3D500%26hei%3D500_640x.webp',
     },
     {
       'name': 'Puma Suede Classic XXI',
@@ -413,7 +450,7 @@ class SneakerCart extends StatelessWidget {
       'category': 'New',
       'price': 100000,
       'imageUrl':
-          'https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/381173/06/sv01/fnd/PNA/fmt/png/Suede-Classic-XXI-Kids\'-Sneakers',
+          'https://media.hypedc.com/cdn-cgi/image/fit=scale-down,f=auto,w=2400/products/e4c7b908-38a5-4027-93d4-3336b23e4ae4/fn6952-100_org_02.jpg',
     },
     {
       'name': 'New Balance 997H',
@@ -421,7 +458,39 @@ class SneakerCart extends StatelessWidget {
       'category': 'Top Selling',
       'price': 130000,
       'imageUrl':
-          'fmt=webp&wid=472&hei=472',
+          'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/06f48fa5-6aaf-4197-9eeb-039fbf58fcc0/air-max-270-big-kids-shoes-HbtNX3.png',
+    },
+    {
+      'name': 'Nike Air Max 90',
+      'type': 'Хүүхэд',
+      'category': 'Basketball',
+      'price': 150000,
+      'imageUrl':
+          'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/1397d932-3fae-4932-859e-521de1721fdc/infinity-flow-big-kids-running-shoes-2fM32q.png',
+    },
+    {
+      'name': 'Adidas Superstar',
+      'type': 'Хүүхэд',
+      'category': 'Sale',
+      'price': 120000,
+      'imageUrl':
+          'https://cdn.mall.adeptmind.ai/https%3A%2F%2Fimages.footlocker.com%2Fis%2Fimage%2FEBFL2%2FD7784602%3Fwid%3D500%26hei%3D500_640x.webp',
+    },
+    {
+      'name': 'Puma Suede Classic XXI',
+      'type': 'Хүүхэд',
+      'category': 'New',
+      'price': 100000,
+      'imageUrl':
+          'https://media.hypedc.com/cdn-cgi/image/fit=scale-down,f=auto,w=2400/products/e4c7b908-38a5-4027-93d4-3336b23e4ae4/fn6952-100_org_02.jpg',
+    },
+    {
+      'name': 'New Balance 997H',
+      'type': 'Хүүхэд',
+      'category': 'Top Selling',
+      'price': 130000,
+      'imageUrl':
+          'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/06f48fa5-6aaf-4197-9eeb-039fbf58fcc0/air-max-270-big-kids-shoes-HbtNX3.png',
     },
     
   ];
@@ -443,6 +512,15 @@ class SneakerCart extends StatelessWidget {
             brandName: "Adidas",
             logoUrl:
                 "https://purepng.com/public/uploads/large/21502362475r8bjrgyzs78go6s1hjhf8hfz22xjolzbtlkj7loqtg18wsxpb6l72dmqxhn1regqpjjscyuppavtcnacyuummijt8cmz7wj1ehjx.png",
+          ),
+          BrandCard(
+            brandName: "New Balance",
+            logoUrl:
+                "https://logowik.com/content/uploads/images/new-balance.jpg",
+          ),BrandCard(
+            brandName: "Puma",
+            logoUrl:
+                "https://1000logos.net/wp-content/uploads/2021/04/Puma-logo.png",
           ),
           BrandCard(
             brandName: "Parker",

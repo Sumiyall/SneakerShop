@@ -35,7 +35,14 @@ class Login1 extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  FadeInUp(duration: Duration(milliseconds: 1000), child: Text("test orloo1", style: TextStyle(fontFamily: 'Mogul2', color: Colors.white, fontSize: 40),)),
+                  FadeInUp(
+                    duration: Duration(milliseconds: 1000),
+                    child: Image.asset(
+                      'assets/images/sneakerr.png',
+                      width: 100,
+                      height: 100,
+                    ),
+                  ),
                   SizedBox(height: 20,),
                   FadeInUp(duration: Duration(milliseconds: 1300), child: Text("Гутлын дэлгүүрт тавтай морил", style: TextStyle(fontFamily: 'Mogul', color: Colors.white, fontSize: 40),)),
                 ],

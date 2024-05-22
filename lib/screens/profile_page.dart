@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/screens/hi1.dart';
 import 'package:shop_app/screens/settings.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -78,6 +79,10 @@ class _ProfilePageState extends State<ProfilePage> {
             leading: Icon(Icons.logout),
             title: Text('Log Out'),
             onTap: () {
+              Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => Login1()),
+            );
             },
           ),
         ],
